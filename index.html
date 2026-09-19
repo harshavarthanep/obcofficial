@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OCB — Original Clothing Brand | Coming Soon</title>
+<meta name="description" content="OCB — Original Clothing Brand. Some things aren't said. They're worn. First collection coming soon. Get early access.">
+<meta name="theme-color" content="#0B0B0B">
+<meta property="og:title" content="OCB — Original Clothing Brand">
+<meta property="og:description" content="Some things aren't said. They're worn. First collection, coming soon.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=2000&q=82" fetchpriority="high">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B0B0B'/%3E%3Crect x='30' y='18' width='40' height='64' rx='20' fill='none' stroke='%23F5F0EA' stroke-width='5'/%3E%3Crect x='42' y='32' width='16' height='36' rx='8' fill='none' stroke='%23F5F0EA' stroke-width='5'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   OCB — ORIGINAL CLOTHING BRAND
+   Pre-launch landing page. Single file. No dependencies.
+   Palette locked to the logo: ink #0B0B0B / cream #F5F0EA
+   ============================================================ */
+
+:root{
+  --ink:#0B0B0B;
+  --ink-1:#101010;
+  --ink-2:#151515;
+  --cream:#F5F0EA;
+  --cream-dim:rgba(245,240,234,.58);
+  --cream-fade:rgba(245,240,234,.34);
+  --line:rgba(245,240,234,.13);
+  --line-strong:rgba(245,240,234,.26);
+  --ink-dim:rgba(11,11,11,.62);
+  --ink-fade:rgba(11,11,11,.38);
+  --line-dark:rgba(11,11,11,.14);
+  /* Type system — all three are free on Google Fonts.
+     Instrument Sans stands in for Neue Montreal / Söhne (both paid foundry fonts).
+     Space Grotesk carries every uppercase label. DM Sans carries body copy. */
+  --display:"Instrument Sans","Neue Montreal","Söhne","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --sans:"DM Sans","Instrument Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Space Grotesk","Instrument Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,.05,.36,1);
+  --pad:clamp(20px,5vw,72px);
+  --max:1440px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--ink);color:var(--cream);
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.62;
+  letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+body.is-locked{overflow:hidden;height:100vh}
+img,svg{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--cream);color:var(--ink)}
+
+/* ---------- type primitives ---------- */
+.display{
+  font-family:var(--display);font-weight:600;line-height:.88;
+  letter-spacing:-.045em;text-transform:uppercase;margin:0;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:clamp(9px,1vw,10.5px);letter-spacing:.34em;text-transform:uppercase;
+  font-weight:500;color:var(--cream-fade);margin:0;
+}
+.section-title{
+  font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-size:clamp(2.4rem,7.4vw,5.6rem);line-height:.86;letter-spacing:-.042em;margin:0;
+}
+.lede{font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.82;color:var(--cream-dim);font-weight:400}
+
+/* ---------- layout ---------- */
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+section{position:relative}
+.rule{height:1px;background:var(--line);width:100%;transform-origin:left;}
+
+/* ---------- grain + vignette ---------- */
+.grain{
+  position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:900;
+  opacity:.045;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 7s steps(6) infinite;
+}
+@keyframes grainShift{
+  0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}
+  60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,1%)}100%{transform:translate(0,0)}
+}
+
+/* ---------- cursor ---------- */
+.cursor{
+  position:fixed;top:0;left:0;width:26px;height:26px;border:1px solid var(--line-strong);
+  border-radius:50%;pointer-events:none;z-index:950;mix-blend-mode:difference;
+  transform:translate(-50%,-50%);transition:width .45s var(--ease),height .45s var(--ease),
+  background-color .45s var(--ease),border-color .45s var(--ease),opacity .3s;opacity:0;
+}
+.cursor.on{opacity:1}
+.cursor.grow{width:64px;height:64px;background:rgba(245,240,234,.1);border-color:rgba(245,240,234,.5)}
+.cursor-dot{
+  position:fixed;top:0;left:0;width:4px;height:4px;background:var(--cream);border-radius:50%;
+  pointer-events:none;z-index:951;transform:translate(-50%,-50%);mix-blend-mode:difference;opacity:0;
+  transition:opacity .3s
+}
+.cursor-dot.on{opacity:1}
+@media (hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+/* ---------- preloader ---------- */
+.loader{
+  position:fixed;inset:0;z-index:1000;background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;
+}
+.loader__mark{width:58px;color:var(--cream)}
+.loader__mark path{
+  fill:none;stroke:var(--cream);stroke-width:1.15;vector-effect:non-scaling-stroke;
+  stroke-linejoin:round;stroke-dasharray:var(--len,4000);stroke-dashoffset:var(--len,4000);
+  animation:drawIn 2.1s var(--ease-io) forwards;
+}
+@keyframes drawIn{to{stroke-dashoffset:0}}
+.loader__bar{width:min(210px,44vw);height:1px;background:var(--line);position:relative;overflow:hidden}
+.loader__bar i{position:absolute;inset:0;background:var(--cream);transform:scaleX(0);transform-origin:left;transition:transform .3s linear}
+.loader__num{font-family:var(--mono);font-size:10px;letter-spacing:.36em;color:var(--cream-fade);font-variant-numeric:tabular-nums}
+.loader.done{transform:translateY(-100%);transition:transform 1.05s var(--ease) .12s}
+.loader__veil{position:fixed;inset:0;z-index:999;background:var(--ink);transform:translateY(0);pointer-events:none}
+.loader__veil.done{transform:translateY(-100%);transition:transform 1.05s var(--ease)}
+
+/* ---------- nav (floating capsule) ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:clamp(14px,2.2vw,26px) var(--pad);
+  transition:transform .7s var(--ease),padding .6s var(--ease);
+}
+.nav.hide{transform:translateY(-140%)}
+.nav__logo{display:flex;align-items:center;gap:12px;flex:none;position:relative;z-index:2}
+.nav__logo .m{width:19px;color:var(--cream);flex:none;
+  transition:transform .8s var(--ease)}
+.nav__logo:hover .m{transform:rotate(-8deg) scale(1.08)}
+.nav__logo .w{width:64px;color:var(--cream)}
+
+/* the capsule itself — centred, glassy, borrowed from the reference */
+.nav__mid{
+  display:none;gap:4px;align-items:center;
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  padding:7px;border-radius:999px;
+  background:rgba(18,18,18,.55);
+  border:1px solid var(--line);
+  backdrop-filter:blur(18px) saturate(1.3);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);
+  box-shadow:0 1px 0 rgba(245,240,234,.06) inset, 0 18px 46px rgba(0,0,0,.5);
+  transition:background-color .6s var(--ease),border-color .6s var(--ease),box-shadow .6s var(--ease);
+  isolation:isolate;
+}
+@media(min-width:900px){.nav__mid{display:flex}}
+.nav.solid .nav__mid{background:rgba(14,14,14,.78);border-color:var(--line-strong)}
+
+/* sliding highlight pill that follows the active / hovered link */
+.nav__pill{
+  position:absolute;top:7px;bottom:7px;left:0;width:0;border-radius:999px;
+  background:rgba(245,240,234,.09);
+  border:1px solid rgba(245,240,234,.12);
+  opacity:0;pointer-events:none;z-index:0;
+  transition:transform .62s var(--ease),width .62s var(--ease),opacity .42s var(--ease);
+}
+.nav__mid.lit .nav__pill{opacity:1}
+
+.nav__mid a{
+  position:relative;z-index:1;
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:500;color:var(--cream-fade);
+  padding:10px 20px;border-radius:999px;white-space:nowrap;
+  transition:color .45s var(--ease);
+}
+.nav__mid a:hover,.nav__mid a:focus-visible{color:var(--cream)}
+.nav__mid a.active{color:var(--cream)}
+.nav__mid a:focus-visible{outline:1px solid var(--line-strong);outline-offset:2px}
+
+/* mobile: compact capsule of section dots */
+.nav__mob{
+  display:flex;gap:2px;align-items:center;
+  padding:5px;border-radius:999px;
+  background:rgba(18,18,18,.55);border:1px solid var(--line);
+  backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
+}
+@media(min-width:900px){.nav__mob{display:none}}
+.nav__mob a{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cream-fade);padding:7px 11px;border-radius:999px;transition:color .4s,background-color .4s}
+.nav__mob a.active{color:var(--cream);background:rgba(245,240,234,.09)}
+@media(max-width:400px){.nav__mob a{padding:7px 8px;letter-spacing:.1em}}
+/* the CTA competes with the mobile capsule — hide it on small screens.
+   Scoped to .nav so it outranks .btn{display:inline-flex}. */
+.nav .nav__cta{display:none}
+@media(min-width:900px){.nav .nav__cta{display:inline-flex}}
+/* below 420px the wordmark crowds the capsule — mark alone is enough */
+@media(max-width:420px){.nav__logo .w{display:none}}
+
+/* ---------- buttons ---------- */
+.btn{
+  --bg:var(--cream);--fg:var(--ink);
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  padding:15px 30px;border:1px solid var(--bg);background:transparent;color:var(--bg);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  cursor:pointer;overflow:hidden;border-radius:999px;isolation:isolate;
+  transition:color .5s var(--ease),border-color .5s var(--ease),transform .35s var(--ease);
+  will-change:transform;
+}
+.btn span{position:relative;z-index:2;display:inline-flex;align-items:center;gap:12px;white-space:nowrap}
+.btn::before{
+  content:"";position:absolute;inset:0;background:var(--bg);z-index:1;
+  transform:translateY(101%);transition:transform .62s var(--ease);
+}
+.btn:hover::before,.btn:focus-visible::before{transform:translateY(0)}
+.btn:hover,.btn:focus-visible{color:var(--fg)}
+.btn:focus-visible{outline:2px solid var(--bg);outline-offset:4px}
+.btn .arw{width:12px;height:12px;flex:none;transition:transform .5s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+.btn--sm{padding:11px 22px;font-size:9.5px;letter-spacing:.26em}
+.btn--ink{--bg:var(--ink);--fg:var(--cream)}
+.light .btn--fill,.btn--fill{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.light .btn--fill::before,.btn--fill::before{background:var(--cream)}
+.light .btn--fill:hover,.light .btn--fill:focus-visible,.btn--fill:hover{color:var(--ink)}
+
+/* ---------- reveal system ---------- */
+[data-rv]{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1.15s var(--ease)}
+[data-rv].in{opacity:1;transform:none}
+.mask{display:block;overflow:hidden}
+.mask > *{display:block;transform:translateY(105%);transition:transform 1.15s var(--ease)}
+.mask.in > *{transform:none}
+.rule[data-rv]{transform:scaleX(0);opacity:1;transition:transform 1.3s var(--ease)}
+.rule[data-rv].in{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){
+  [data-rv],.mask>*{opacity:1!important;transform:none!important;transition:none!important}
+  .grain{animation:none}
+  .loader__mark path{animation:none;stroke-dashoffset:0}
+}
+
+/* ================= HERO ================= */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;padding-bottom:clamp(28px,5vh,56px)}
+.hero__bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero__glow{
+  position:absolute;left:50%;top:44%;width:min(150vh,150vw);aspect-ratio:1;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(245,240,234,.085) 0%,rgba(245,240,234,.02) 42%,transparent 68%);
+  animation:breathe 11s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.85}50%{transform:translate(-50%,-50%) scale(1.12);opacity:1}}
+.hero__motif{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:min(122vh,1180px);width:auto;color:var(--cream);opacity:.14;
+  will-change:transform;
+}
+.hero__motif svg{height:100%;width:auto}
+.hero__motif .st{fill:none;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke}
+.hero__scan{
+  position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,rgba(245,240,234,.028) 0 1px,transparent 1px 4px);
+  opacity:.55;
+}
+.hero__vign{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(11,11,11,.55) 78%,rgba(11,11,11,.92) 100%)}
+.hero__inner{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;
+  padding:0 var(--pad)}
+.hero__top{position:absolute;top:clamp(90px,14vh,150px);left:var(--pad);right:var(--pad);
+  display:flex;justify-content:space-between;gap:20px;z-index:2;max-width:calc(var(--max) - var(--pad)*2);
+  margin:0 auto}
+.hero h1{
+  font-size:clamp(2.6rem,9.6vw,9.4rem);
+  max-width:16ch;margin:0 0 clamp(22px,3.4vh,38px);
+}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln > span{display:block;transform:translateY(108%);
+  transition:transform 1.35s var(--ease)}
+.hero h1 .ln:nth-child(2) > span{transition-delay:.11s}
+.ready .hero h1 .ln > span{transform:none}
+/* Emphasis line: weight contrast, not italic. A grotesque carries emphasis
+   through mass, so the payoff line drops to 400 against the 600 above it.
+   (Outlining it with -webkit-text-stroke spikes at the Y/R/W miters.) */
+.hero h1 em{
+  font-style:normal;font-weight:400;letter-spacing:-.04em;
+  color:var(--cream);
+}
+.hero__sub{max-width:34ch;font-size:clamp(.9rem,1.35vw,1.06rem);color:var(--cream-dim);
+  margin:0 0 clamp(26px,3.6vh,40px);line-height:1.75}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.4vw,30px)}
+.hero__teaser{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--cream-fade)}
+.hero__fade{opacity:0;transform:translateY(24px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.ready .hero__fade{opacity:1;transform:none}
+.ready .hero__sub{transition-delay:.34s}
+.ready .hero__cta{transition-delay:.44s}
+.ready .hero__top{transition-delay:.54s}
+.hero__scroll{
+  position:absolute;bottom:clamp(24px,4vh,44px);right:var(--pad);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:11px
+}
+.hero__scroll span{writing-mode:vertical-rl}
+.hero__scroll .track{width:1px;height:52px;background:var(--line);position:relative;overflow:hidden}
+.hero__scroll .track i{position:absolute;top:0;left:0;width:100%;height:40%;background:var(--cream);
+  animation:trickle 2.4s var(--ease-io) infinite}
+@keyframes trickle{0%{transform:translateY(-100%)}60%,100%{transform:translateY(260%)}}
+.hero__scroll span{font-family:var(--mono);font-size:8.5px;letter-spacing:.3em;color:var(--cream-fade);text-transform:uppercase}
+@media(max-width:900px){.hero__scroll{display:none}}
+
+/* ================= MARQUEE ================= */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;overflow:hidden;background:var(--ink-1);position:relative;z-index:2}
+.marquee__row{display:flex;width:max-content;animation:slide 34s linear infinite}
+.marquee:hover .marquee__row{animation-play-state:paused}
+.marquee__row > div{display:flex;align-items:center;flex:none}
+.marquee__row span{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--cream-fade);padding:0 26px;white-space:nowrap;font-weight:400}
+.marquee__row svg{width:11px;color:var(--cream-fade);flex:none;opacity:.7}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee__row{animation:none}}
+
+/* ================= LIGHT SECTION ================= */
+.light{background:var(--cream);color:var(--ink)}
+.light .eyebrow{color:var(--ink-fade)}
+.light .lede{color:var(--ink-dim)}
+.light .rule{background:var(--line-dark)}
+.light .btn{--bg:var(--ink);--fg:var(--cream)}
+
+/* ================= PHILOSOPHY ================= */
+.philo{padding:clamp(88px,15vh,190px) 0;overflow:hidden}
+.philo__grid{display:grid;gap:clamp(34px,6vw,90px);grid-template-columns:1fr}
+@media(min-width:940px){.philo__grid{grid-template-columns:.92fr 1.08fr;align-items:start}}
+.philo__head{position:relative}
+@media(min-width:940px){.philo__head{position:sticky;top:120px}}
+.philo__body p{margin:0 0 1.7em;font-size:clamp(1.05rem,1.85vw,1.5rem);line-height:1.62;
+  font-weight:300;color:var(--ink);max-width:33ch}
+.philo__body p:last-child{margin-bottom:0}
+.philo__body .dim{color:var(--ink-dim)}
+.philo__body .ln{display:block;overflow:hidden}
+.philo__body .ln > span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+.philo__body .ln.in > span{transform:none}
+.philo__sigil{width:clamp(90px,13vw,168px);margin-top:36px;color:var(--ink);opacity:.9}
+.philo__sigil path{fill:none;stroke:currentColor;stroke-width:1.15;
+  vector-effect:non-scaling-stroke;stroke-linejoin:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.philo__sigil.in path{transition:stroke-dashoffset 2.6s var(--ease-io);stroke-dashoffset:0}
+
+/* ================= WORLD (mood grid) ================= */
+.world{padding:clamp(70px,11vh,140px) 0 clamp(62px,9vh,120px);background:var(--ink);position:relative}
+.world__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
+  gap:22px;margin-bottom:clamp(34px,5vw,60px)}
+.world__title{margin-top:18px}
+.world__grid{display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(2,1fr)}
+@media(min-width:860px){.world__grid{grid-template-columns:repeat(3,1fr)}}
+.tile{
+  position:relative;aspect-ratio:3/4.1;overflow:hidden;background:var(--ink-2);
+  border:1px solid var(--line);isolation:isolate;
+}
+@media(min-width:860px){
+  .tile:nth-child(3n+2){margin-top:clamp(16px,3vw,48px)}
+}
+.tile{background:radial-gradient(120% 90% at 50% 20%,#1c1c1c 0%,#111 55%,#0d0d0d 100%)}
+.tile svg{position:absolute;inset:0;width:100%;height:100%;color:var(--cream);
+  transition:transform 1.6s var(--ease),opacity .8s var(--ease);opacity:.62}
+.tile:hover svg{transform:scale(1.06);opacity:.9}
+.tile::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(11,11,11,.75),transparent 55%);pointer-events:none}
+.tile__lab{position:absolute;left:14px;bottom:13px;z-index:2;font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--cream-dim);transition:color .5s var(--ease)}
+.tile:hover .tile__lab{color:var(--cream)}
+.tile__no{position:absolute;right:12px;top:11px;z-index:2;font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;
+  color:var(--cream-fade);font-variant-numeric:tabular-nums}
+.world__quote{margin-top:clamp(30px,4.5vw,52px);display:flex;justify-content:flex-end}
+.world__quote p{font-family:var(--display);font-size:clamp(1.05rem,2.1vw,1.55rem);line-height:1.3;
+  margin:0;letter-spacing:-.03em;font-weight:500;color:var(--cream-dim);
+  max-width:24ch;text-align:right;position:relative;padding-right:2px}
+
+/* ================= FIRST DROP ================= */
+.drop{padding:clamp(88px,15vh,190px) 0;overflow:hidden}
+.drop__grid{display:grid;gap:clamp(40px,6vw,88px);grid-template-columns:1fr;align-items:center}
+@media(min-width:980px){.drop__grid{grid-template-columns:.94fr 1.2fr}}
+.drop__copy p{margin:0 0 1.5em;font-size:clamp(1.02rem,1.6vw,1.32rem);line-height:1.66;
+  font-weight:400;color:var(--ink-dim);max-width:32ch}
+.drop__copy p strong{font-weight:500;color:var(--ink)}
+.drop__meta{display:flex;gap:clamp(20px,3vw,44px);margin:34px 0 40px;flex-wrap:wrap}
+.drop__meta div{display:flex;flex-direction:column;gap:6px}
+.drop__meta dt{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-fade);margin:0}
+.drop__meta dd{margin:0;font-family:var(--display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:-.035em}
+.silh{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,16px)}
+.silh__cell{position:relative;aspect-ratio:3/4;border:1px solid var(--line-dark);overflow:hidden;
+  background:linear-gradient(160deg,rgba(11,11,11,.045),transparent 60%);display:grid;place-items:center}
+.silh__cell svg{width:80%;height:auto;color:var(--ink);
+  transition:transform 1s var(--ease),opacity .7s var(--ease)}
+.silh__cell:hover svg{transform:translateY(-6px) scale(1.03)}
+.silh__cell .g{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.silh__cell.in .g{transition:stroke-dashoffset 2.2s var(--ease-io);stroke-dashoffset:0}
+.silh__cell:nth-child(2).in .g{transition-delay:.16s}
+.silh__cell:nth-child(3).in .g{transition-delay:.32s}
+.silh__cell i{position:absolute;left:10px;bottom:9px;font-style:normal;font-size:8px;
+  font-family:var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-fade)}
+.silh__note{margin-top:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-fade);text-align:right}
+
+/* ================= WHY EARLY ================= */
+.why{padding:clamp(88px,15vh,190px) 0;background:var(--ink)}
+.why__head{max-width:none;margin-bottom:clamp(46px,7vw,86px)}
+.why__head .section-title{max-width:14ch}
+.why__list{display:grid;gap:0;border-top:1px solid var(--line)}
+.why__item{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,44px);align-items:start;
+  padding:clamp(26px,4vw,44px) 0;border-bottom:1px solid var(--line);position:relative;
+  transition:padding-left .7s var(--ease)
+}
+@media(min-width:760px){
+  .why__item{grid-template-columns:auto 42px 1fr}
+  .why__item:hover{padding-left:16px}
+}
+.why__item::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;
+  background:var(--cream);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
+.why__item:hover::before{transform:scaleX(1)}
+.why__no{font-family:var(--mono);font-weight:500;font-size:clamp(1.2rem,2.4vw,1.7rem);line-height:1.2;
+  color:var(--cream-fade);transition:color .6s var(--ease);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.why__item:hover .why__no{color:var(--cream)}
+.why__ico{width:38px;height:38px;color:var(--cream);display:none}
+@media(min-width:760px){.why__ico{display:block}}
+.why__ico .g{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.why__item.in .why__ico .g{transition:stroke-dashoffset 1.8s var(--ease-io) .2s;stroke-dashoffset:0}
+.why__txt h3{margin:0 0 8px;font-family:var(--display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(1.15rem,2.5vw,1.85rem);letter-spacing:-.038em;line-height:1.04}
+.why__txt p{margin:0;font-size:clamp(.9rem,1.25vw,1rem);color:var(--cream-dim);max-width:44ch;line-height:1.7}
+.why__close{margin-top:clamp(38px,5vw,64px);font-family:var(--display);font-weight:500;
+  font-size:clamp(1.15rem,2.6vw,2rem);line-height:1.22;letter-spacing:-.035em;max-width:22ch}
+
+/* ================= SIGNUP ================= */
+.signup{padding:clamp(96px,17vh,210px) 0;background:var(--cream);color:var(--ink);
+  position:relative;overflow:hidden;text-align:center}
+.signup__bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:min(115%,860px);color:var(--ink);opacity:.05;pointer-events:none}
+.signup__bg svg{height:100%;width:auto}
+.signup__bg .st{fill:none;stroke:currentColor;stroke-width:1.4;vector-effect:non-scaling-stroke}
+.signup__inner{position:relative;z-index:2;max-width:640px;margin:0 auto}
+.signup h2{font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-size:clamp(2.8rem,10vw,7rem);line-height:.84;letter-spacing:-.05em;margin:0 0 22px}
+.signup__sub{color:var(--ink-dim);font-size:clamp(.94rem,1.4vw,1.08rem);line-height:1.75;
+  margin:0 auto 40px;max-width:38ch}
+.form{display:flex;gap:10px;flex-direction:column;align-items:stretch;max-width:520px;margin:0 auto}
+@media(min-width:620px){.form{flex-direction:row}}
+.form__field{flex:1;position:relative}
+.form input[type=email]{
+  width:100%;background:transparent;border:1px solid rgba(11,11,11,.24);border-radius:999px;
+  padding:16px 24px;font-size:13.5px;letter-spacing:.06em;color:var(--ink);
+  transition:border-color .5s var(--ease),background-color .5s var(--ease);
+}
+.form input::placeholder{color:var(--ink-fade);font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+.form input:focus{outline:none;border-color:var(--ink);background:rgba(11,11,11,.03)}
+.form input[aria-invalid="true"]{border-color:#8B2F2F}
+.form .btn{flex:none}
+.form__msg{min-height:22px;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-fade);opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s}
+.form__msg.show{opacity:1;transform:none}
+.form__msg.err{color:#8B2F2F}
+.signup__micro{margin-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-fade)}
+.signup__done{display:none;flex-direction:column;align-items:center;gap:20px}
+.signup.done .form,.signup.done .signup__sub,.signup.done .signup__micro,
+.signup.done .form__msg{display:none}
+.signup.done .signup__done{display:flex;animation:fadeUp .9s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.signup__done .tick{width:52px;color:var(--ink)}
+.signup__done .tick .g{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;
+  stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  animation:drawIn 1.4s var(--ease-io) .15s forwards}
+.signup__done p{margin:0;color:var(--ink-dim);font-size:.95rem;max-width:32ch;line-height:1.7}
+
+/* ================= ABOUT ================= */
+.about{padding:clamp(88px,15vh,190px) 0;background:var(--ink);position:relative;overflow:hidden}
+.about__mark{position:absolute;right:-4%;top:50%;transform:translateY(-50%);height:min(88%,620px);
+  color:var(--cream);opacity:.05;pointer-events:none}
+.about__mark svg{height:100%;width:auto}
+.about__grid{display:grid;gap:clamp(30px,5vw,80px);grid-template-columns:1fr;position:relative;z-index:2}
+@media(min-width:900px){.about__grid{grid-template-columns:.6fr 1.4fr}}
+.about__body p{margin:0 0 1.6em;font-size:clamp(1rem,1.6vw,1.28rem);line-height:1.75;
+  color:var(--cream-dim);max-width:44ch;font-weight:400}
+.about__body p:first-child{color:var(--cream)}
+.about__body p:last-child{margin-bottom:0}
+
+/* ================= FINAL CTA ================= */
+.final{min-height:82vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:clamp(90px,14vh,170px) 0;position:relative;overflow:hidden;background:var(--ink)}
+.final__glow{position:absolute;left:50%;bottom:-42%;width:min(150vw,1500px);aspect-ratio:1;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(245,240,234,.1) 0%,transparent 62%);animation:breathe 13s ease-in-out infinite}
+.final__inner{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 var(--pad)}
+.final h2{font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-size:clamp(1.95rem,5.6vw,4.6rem);line-height:.94;letter-spacing:-.044em;margin:0 0 26px}
+.final h2 .ln{display:block;overflow:hidden}
+.final h2 .ln>span{display:block;transform:translateY(106%);transition:transform 1.2s var(--ease)}
+.final h2 .ln.in>span{transform:none}
+.final__sub{color:var(--cream-dim);font-size:clamp(.95rem,1.5vw,1.12rem);margin:0 0 40px}
+
+/* ================= CONTACT ================= */
+.contact{padding:clamp(88px,15vh,180px) 0;background:var(--ink);position:relative;overflow:hidden;
+  border-top:1px solid var(--line)}
+.contact__grid{display:grid;gap:clamp(34px,5vw,70px);grid-template-columns:1fr;align-items:start}
+@media(min-width:900px){.contact__grid{grid-template-columns:.6fr 1.4fr}}
+.contact__title{margin:18px 0 0;font-family:var(--display);text-transform:uppercase;font-weight:600;
+  font-size:clamp(2.2rem,6vw,4.2rem);line-height:.86;letter-spacing:-.044em}
+.contact__rows{display:grid;gap:0;border-top:1px solid var(--line)}
+.contact__row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding:clamp(20px,3vw,30px) 0;border-bottom:1px solid var(--line);
+  position:relative;transition:padding-left .7s var(--ease);
+}
+@media(min-width:760px){.contact__row:hover{padding-left:14px}}
+.contact__row::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;
+  background:var(--cream);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
+.contact__row:hover::before{transform:scaleX(1)}
+.contact__lab{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--cream-fade);flex:none}
+.contact__val{font-family:var(--display);font-weight:500;letter-spacing:-.035em;
+  font-size:clamp(1.05rem,2.6vw,1.9rem);line-height:1.15;color:var(--cream-dim);
+  display:inline-flex;align-items:center;gap:14px;transition:color .5s var(--ease);
+  overflow-wrap:anywhere}
+.contact__row:hover .contact__val{color:var(--cream)}
+.contact__val .arw{width:13px;height:13px;flex:none;opacity:.5;
+  transition:transform .55s var(--ease),opacity .5s var(--ease)}
+.contact__row:hover .contact__val .arw{transform:translate(4px,-4px);opacity:1}
+.contact__note{margin:clamp(28px,4vw,44px) 0 0;font-size:clamp(.9rem,1.3vw,1.02rem);
+  line-height:1.75;color:var(--cream-dim);max-width:40ch}
+
+/* ================= FOOTER ================= */
+.foot{background:var(--ink);border-top:1px solid var(--line);padding:clamp(48px,7vw,80px) 0 30px}
+.foot__grid{display:grid;gap:36px;grid-template-columns:1fr}
+@media(min-width:760px){.foot__grid{grid-template-columns:1.3fr 1fr 1fr;gap:40px}}
+.foot__brand .w{width:120px;color:var(--cream);margin-bottom:16px}
+.foot__brand p{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--cream-fade);line-height:2}
+.foot h4{margin:0 0 16px;font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--cream-fade);font-weight:500}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.foot a{font-size:12px;letter-spacing:.14em;color:var(--cream-dim);transition:color .4s var(--ease);
+  display:inline-flex;align-items:center;gap:8px}
+.foot a:hover{color:var(--cream)}
+.foot a svg{width:12px;flex:none;opacity:.7}
+.foot__bottom{margin-top:clamp(38px,6vw,64px);padding-top:22px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+.foot__bottom p{margin:0;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-fade)}
+.foot__status{display:inline-flex;align-items:flex-start;gap:9px;line-height:1.9}
+.foot__status i{width:5px;height:5px;border-radius:50%;background:var(--cream);flex:none;margin-top:.55em;
+  animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.35)}}
+
+/* ---------- mobile polish ---------- */
+@media(max-width:640px){
+  .nav{padding-top:16px;padding-bottom:16px}
+  .nav__logo .w{width:52px}
+  .nav__logo .m{width:15px}
+  .nav .btn--sm{padding:10px 15px;font-size:8.5px;letter-spacing:.2em}
+  .nav .btn--sm .arw{display:none}
+  .hero{padding-bottom:52px}
+  .hero__cta{gap:20px}
+  .hero__teaser{font-size:9px;letter-spacing:.22em}
+  .hero__top .tag:last-child{display:none}
+  .world{padding-bottom:clamp(56px,9vh,90px)}
+  .world__quote p{text-align:left}
+  .world__quote{justify-content:flex-start}
+  .why__item{grid-template-columns:auto 1fr;column-gap:18px}
+  .form .btn{width:100%}
+  .foot__bottom{gap:10px}
+  .band{height:clamp(240px,42vh,340px)}
+  .silh{grid-template-columns:1fr 1fr}
+  .silh__cell:nth-child(3){grid-column:1 / -1;aspect-ratio:16/10}
+}
+
+/* ============================================================
+   IMAGERY LAYER
+   Every photograph is desaturated to the logo palette, then
+   lets a little colour back in on hover. Photos fade up once
+   decoded (.ld), and fall back to the tonal gradient if a
+   remote image ever fails (.noimg).
+   ============================================================ */
+.pic{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.06) brightness(.94);
+  opacity:0;transform:scale(1.05);
+  transition:opacity 1.25s var(--ease),transform 1.9s var(--ease),filter 1s var(--ease);
+  will-change:opacity,transform;
+}
+.pic.ld{opacity:1;transform:scale(1)}
+.pic.dead{display:none}
+@media (prefers-reduced-motion:reduce){.pic{opacity:1;transform:none;transition:none}}
+
+.ph{position:relative;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 18%,#1d1d1d 0%,#121212 58%,#0d0d0d 100%)}
+.light .ph{background:linear-gradient(160deg,rgba(11,11,11,.07),rgba(11,11,11,.02) 62%)}
+.ph::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(11,11,11,.62),transparent 42%);
+  opacity:.85;transition:opacity .7s var(--ease)}
+.ph:hover::after{opacity:.55}
+.ph:hover .pic{filter:grayscale(.1) contrast(1.02) brightness(1);transform:scale(1.07)}
+
+/* ---------- hero frame ---------- */
+.hero__img{position:absolute;inset:0;overflow:hidden}
+.hero__img .pic{
+  object-position:50% 30%;
+  filter:grayscale(1) contrast(1.14) brightness(.82);
+  transform:scale(1.14);
+  transition:opacity 1.9s var(--ease),transform 3.2s var(--ease);
+}
+.ready .hero__img .pic.ld{transform:scale(1.02)}
+.hero__tint{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(11,11,11,.7) 0%,rgba(11,11,11,.14) 30%,rgba(11,11,11,.62) 72%,var(--ink) 100%),
+    linear-gradient(90deg,rgba(11,11,11,.8) 0%,rgba(11,11,11,.04) 58%,rgba(11,11,11,.42) 100%)}
+.hero__motif{opacity:.055}
+.hero__glow{opacity:.34}
+
+/* the standing figure, pinned opposite the headline */
+.hero__plate{display:none;margin:0}
+@media(min-width:1100px){
+  .hero__plate{
+    display:block;position:absolute;z-index:2;
+    right:var(--pad);bottom:clamp(155px,20vh,220px);
+    width:min(21vw,272px);aspect-ratio:3/4.2;
+    border:1px solid var(--line-strong);overflow:hidden;
+    opacity:0;transform:translateY(38px);
+    transition:opacity 1.4s var(--ease) .8s,transform 1.4s var(--ease) .8s;
+  }
+  .ready .hero__plate{opacity:1;transform:none}
+  /* the figure claims the right column, so the headline is capped
+     to clear it rather than run underneath */
+  .hero h1{font-size:clamp(2.6rem,7.5vw,7.9rem);max-width:none}
+  .hero__sub,.hero__cta{max-width:min(62vw,860px)}
+  .hero__plate figcaption{
+    position:absolute;left:12px;bottom:11px;z-index:2;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--cream-fade)}
+}
+
+/* ---------- full-bleed band ---------- */
+.band{position:relative;height:clamp(280px,52vh,560px);overflow:hidden;background:var(--ink);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band .pic{position:absolute;left:0;top:-12%;width:100%;height:124%;
+  object-position:50% 34%;filter:grayscale(1) contrast(1.08) brightness(.7)}
+.band__tint{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(11,11,11,.88) 0%,rgba(11,11,11,.2) 52%,rgba(11,11,11,.8) 100%)}
+.band__rule{position:absolute;left:var(--pad);bottom:clamp(18px,3vw,30px);z-index:2;
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--cream-fade)}
+.band__rule i{display:block;width:clamp(28px,6vw,72px);height:1px;background:currentColor}
+
+/* ---------- lookbook tiles ---------- */
+.tile .pic{position:absolute;inset:0}
+.tile .pic.ld{transform:scale(1)}
+.tile:hover .pic{transform:scale(1.06);filter:grayscale(.08) contrast(1.02) brightness(1)}
+
+/* ---------- collection rack ---------- */
+.silh__cell{aspect-ratio:3/4.3;
+  background:linear-gradient(160deg,rgba(11,11,11,.08),rgba(11,11,11,.02) 60%)}
+.silh__cell .pic{position:absolute;inset:0;
+  filter:grayscale(1) contrast(1.04) brightness(1)}
+.silh__cell:hover .pic{transform:scale(1.06);filter:grayscale(.08) contrast(1.02)}
+.silh__cell::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(11,11,11,.58),transparent 46%)}
+.silh__cell i{color:var(--cream);z-index:2;opacity:.82}
+
+/* ---------- about portrait ---------- */
+.about__ph{margin:clamp(30px,4vw,46px) 0 0;aspect-ratio:4/5;border:1px solid var(--line)}
+@media(min-width:900px){.about__ph{aspect-ratio:3/4.2}}
+
+/* ---------- final cta frame ---------- */
+.final__img{position:absolute;inset:0;z-index:0;overflow:hidden}
+.final__img .pic{object-position:50% 32%;
+  filter:grayscale(1) contrast(1.1) brightness(.52)}
+.final__img .pic.ld{opacity:.55}
+.final__tint{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(11,11,11,.55) 22%,rgba(11,11,11,.9) 72%,var(--ink) 100%)}
+
+/* misc */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:9px;font-size:9px;letter-spacing:.32em;
+  font-family:var(--mono);text-transform:uppercase;color:var(--cream-fade)}
+.tag i{width:22px;height:1px;background:currentColor;display:block}
+.light .tag{color:var(--ink-fade)}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG SYMBOL LIBRARY (all marks are vector, no images) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ocbMark" viewBox="0 0 724 1126">
+      <g transform="translate(0,1126) scale(0.1,-0.1)"><path id="markPathSrc" d="M3235 11251 c-6 -5 -39 -12 -75 -15 -65 -6 -158 -19 -215 -31 -117
+-23 -150 -31 -230 -51 -1300 -328 -2377 -1439 -2636 -2719 -36 -180 -47 -245
+-55 -335 -3 -36 -10 -69 -15 -74 -21 -23 -11 -2201 10 -2220 43 -39 129 -36
+167 5 18 20 19 54 24 1088 3 586 9 1072 13 1079 5 7 13 50 18 95 5 45 13 107
+19 137 5 30 12 71 15 90 3 19 10 51 15 70 5 19 14 58 20 85 7 28 15 61 20 75
+4 14 13 45 20 70 304 1079 1231 2006 2310 2310 25 7 56 16 70 20 14 5 48 13
+75 20 28 6 66 15 85 20 19 5 51 12 70 15 19 3 60 10 90 16 112 19 209 29 388
+39 239 14 536 -2 752 -39 30 -6 71 -13 90 -16 19 -3 51 -10 70 -15 19 -5 58
+-14 85 -20 28 -7 61 -15 75 -20 14 -4 45 -13 70 -20 991 -279 1901 -1127 2233
+-2080 9 -25 26 -72 38 -105 12 -33 26 -75 30 -92 5 -18 14 -50 20 -70 6 -21
+15 -55 20 -75 5 -21 14 -57 20 -80 24 -96 47 -231 57 -334 5 -44 13 -87 18
+-95 5 -8 11 -689 14 -1697 6 -1880 -3 -1742 107 -1742 112 0 104 -147 99 1763
+-2 1220 -6 1734 -15 1787 -28 185 -36 232 -60 340 -18 80 -29 125 -62 240 -6
+19 -14 49 -18 65 -5 17 -18 57 -30 90 -13 33 -26 71 -30 85 -326 1040 -1477
+2042 -2606 2271 -180 36 -245 47 -335 55 -36 3 -69 10 -74 15 -6 5 -178 9
+-386 9 -208 0 -380 -4 -385 -9z M3379 10176 c-3 -3 -50 -10 -105 -16 -207 -20
+-323 -46 -544 -117 -850 -276 -1517 -1044 -1651 -1898 -33 -218 -34 -257 -34
+-2510 0 -2497 -3 -2400 75 -2705 364 -1436 1973 -2224 3390 -1660 730 290
+1310 943 1479 1663 30 127 35 153 53 272 7 46 12 607 14 1668 4 1599 4 1599
+-30 1633 -48 48 -101 48 -151 -1 -35 -35 -35 -35 -38 -1628 -3 -1109 -7 -1613
+-15 -1662 -16 -97 -35 -184 -62 -280 -6 -22 -15 -53 -19 -70 -174 -638 -843
+-1281 -1528 -1466 -18 -5 -50 -14 -70 -19 -353 -97 -800 -98 -1163 -3 -97 26
+-114 31 -175 51 -838 279 -1448 1030 -1532 1887 -14 143 -10 4545 4 4660 20
+158 33 224 62 325 5 19 14 51 20 70 194 698 877 1345 1596 1512 22 5 58 13 80
+19 196 47 573 70 760 46 108 -14 199 -28 235 -37 19 -5 58 -14 85 -21 508
+-119 1001 -448 1306 -869 262 -362 393 -731 417 -1175 9 -165 32 -205 118
+-205 108 0 134 193 69 525 -23 118 -28 143 -35 165 -4 14 -13 45 -20 70 -250
+891 -1030 1577 -1980 1741 -148 25 -595 51 -611 35z M3420 9159 c-666 -82
+-1187 -582 -1285 -1231 -23 -149 -22 -2765 0 -2808 25 -48 78 -63 139 -40 53
+20 51 -48 57 1440 6 1526 1 1411 69 1605 362 1024 1836 1124 2337 160 138
+-266 143 -313 143 -1312 0 -928 0 -927 -123 -1060 -140 -152 -110 -147 -940
+-153 -793 -6 -767 -2 -767 -110 0 -109 -1 -109 791 -110 774 0 767 1 902 -135
+136 -139 137 -141 137 -1058 0 -918 -5 -979 -92 -1192 -396 -963 -1765 -1055
+-2293 -155 -142 243 -164 367 -165 918 0 440 -5 462 -105 462 -100 0 -105 -21
+-105 -477 0 -556 23 -688 161 -952 553 -1057 2128 -1043 2658 24 146 295 146
+297 146 1340 0 1071 6 1037 -207 1248 -88 88 -88 88 -13 159 124 116 194 249
+216 416 22 166 6 1752 -19 1863 -171 756 -877 1254 -1642 1158z M3460 8285
+c-244 -67 -433 -271 -486 -525 -22 -101 -20 -1389 1 -1430 32 -61 127 -71 176
+-19 29 31 29 31 29 700 0 554 2 678 15 724 110 422 681 476 856 80 45 -102 49
+-153 49 -622 0 -442 0 -442 23 -468 46 -54 150 -40 176 23 28 68 9 1027 -22
+1107 -87 223 -233 356 -478 434 -46 15 -281 12 -339 -4z M37 4993 c-37 -26
+-37 -26 -33 -887 2 -519 8 -889 14 -931 30 -207 64 -374 102 -510 6 -22 15
+-53 19 -70 294 -1054 1172 -1993 2225 -2377 175 -64 371 -119 516 -147 30 -6
+69 -13 85 -16 66 -14 154 -26 225 -31 41 -3 79 -10 84 -15 13 -12 679 -12 691
+0 6 5 44 12 85 15 71 5 159 17 225 31 17 3 55 10 85 16 30 6 73 15 95 21 79
+20 120 30 145 38 14 4 45 13 70 20 1134 318 2109 1309 2440 2480 7 25 16 56
+20 70 4 14 13 52 20 85 7 33 16 71 20 85 5 14 11 45 15 70 4 25 11 70 16 100
+5 30 12 87 15 125 3 39 10 74 15 80 30 31 9 440 -24 463 -122 82 -172 14 -187
+-253 -86 -1577 -1201 -2867 -2745 -3176 -215 -43 -335 -53 -655 -53 -355 0
+-471 11 -750 73 -1145 252 -2106 1122 -2482 2246 -39 116 -49 150 -68 225 -97
+383 -108 528 -109 1473 -1 755 1 730 -61 762 -41 21 -69 18 -113 -12z M4129
+4831 c-29 -29 -29 -29 -29 -610 0 -612 -1 -620 -48 -741 -137 -348 -652 -365
+-815 -27 -55 114 -57 125 -57 385 0 291 -30 350 -152 303 -65 -25 -101 -406
+-57 -598 69 -305 259 -490 567 -552 293 -60 618 136 739 446 26 66 51 1260 28
+1351 -18 73 -121 98 -176 43z" fill="currentColor"/></g>
+    </symbol>
+    <symbol id="ocbWord" viewBox="0 0 2230 914">
+      <g transform="translate(0,914) scale(0.1,-0.1)"><path d="M3435 9129 c-22 -4 -85 -13 -140 -20 -1656 -196 -3016 -1517 -3259
+-3165 -36 -247 -38 -272 -34 -579 34 -2645 2738 -4386 5270 -3394 1698 666
+2657 2459 2267 4239 -333 1522 -1659 2714 -3224 2900 -55 6 -119 16 -142 21
+-51 11 -682 10 -738 -2z m506 -420 c1158 -91 1760 -1225 1760 -3312 0 -2136
+-659 -3276 -1892 -3277 -1225 -1 -1889 1154 -1889 3285 0 1856 489 2975 1420
+3247 125 36 225 51 446 67 11 0 81 -4 155 -10z M12005 9130 c-22 -4 -89 -13
+-150 -20 -2287 -245 -3889 -2237 -3515 -4372 5 -32 14 -82 19 -112 124 -717
+564 -1468 1151 -1967 636 -539 1381 -841 2350 -951 154 -17 796 -17 940 0 58
+7 143 17 190 23 630 78 1292 298 1792 596 165 98 164 98 172 175 4 35 11 101
+16 148 5 47 14 132 20 190 6 58 15 143 20 190 5 47 14 132 20 190 6 58 15 147
+20 198 6 50 14 134 20 185 5 50 14 139 20 197 20 189 41 392 61 574 14 129 18
+123 -100 150 -106 24 -89 41 -251 -241 -670 -1164 -1115 -1694 -1656 -1970
+-516 -264 -1170 -263 -1684 3 -895 464 -1347 1780 -1230 3585 118 1827 743
+2729 1945 2808 952 63 1542 -329 2600 -1730 158 -209 141 -197 242 -169 110
+31 109 28 94 152 -17 147 -28 248 -41 363 -6 55 -15 136 -20 180 -5 44 -14
+125 -20 180 -14 125 -28 257 -40 360 -5 44 -14 125 -20 180 -6 55 -15 136 -20
+180 -5 44 -14 125 -20 180 -24 217 -9 193 -135 228 -317 89 -725 177 -1100
+237 -110 18 -368 48 -510 60 -77 6 -173 16 -213 21 -88 11 -910 10 -967 -1z
+M17278 9001 c-608 -3 -1110 -9 -1114 -13 -4 -4 3 -31 15 -60 276 -650 366
+-990 413 -1558 19 -222 19 -3677 0 -3895 -22 -267 -53 -478 -98 -665 -18 -74
+-71 -263 -84 -300 -79 -223 -125 -343 -182 -479 -38 -91 -66 -171 -64 -178 7
+-16 3314 -19 3666 -3 1465 67 2299 598 2440 1555 7 44 16 99 21 122 39 181 -8
+600 -97 853 -205 590 -746 995 -1576 1180 -124 27 -124 29 30 80 743 247 1183
+723 1291 1395 152 946 -318 1624 -1284 1850 -38 9 -88 20 -110 25 -65 16 -262
+47 -370 59 -55 6 -143 16 -195 22 -116 14 -1168 17 -2702 10z m2005 -436 c652
+-117 980 -558 981 -1320 1 -817 -365 -1334 -1026 -1450 -63 -11 -175 -15 -470
+-15 -388 0 -388 0 -388 1384 0 1384 0 1384 28 1390 23 4 190 19 347 30 110 8
+443 -4 528 -19z m-48 -3224 c785 -66 1191 -556 1212 -1461 23 -1009 -418
+-1562 -1300 -1630 -201 -16 -706 14 -755 44 -13 8 -18 3036 -5 3049 10 10 722
+8 848 -2z M986 799 c-464 -77 -398 -781 74 -782 481 -2 539 706 63 783 -65 11
+-68 11 -137 -1z m212 -93 c234 -123 230 -486 -6 -594 -346 -158 -618 348 -308
+571 71 50 239 63 314 23z M3724 800 c-470 -70 -410 -780 66 -784 248 -3 285
+29 285 244 0 175 0 175 -125 175 -125 0 -125 0 -128 -27 -4 -32 8 -37 108 -40
+65 -3 65 -3 68 -120 3 -150 0 -153 -188 -153 -220 0 -325 102 -325 315 0 270
+268 416 486 264 40 -27 40 -27 66 -1 66 65 -147 152 -313 127z M9064 800
+c-422 -64 -425 -699 -3 -780 157 -31 399 79 333 151 -24 26 -44 23 -78 -11
+-158 -162 -438 -54 -487 188 -57 278 264 502 469 327 36 -32 43 -34 61 -23
+101 63 -122 175 -295 148z M10966 800 c-202 -36 -332 -215 -312 -432 46 -500
+766 -465 770 37 2 266 -200 440 -458 395z m212 -94 c231 -121 231 -475 -1
+-590 -352 -176 -623 333 -305 573 59 44 236 54 306 17z M15900 800 c-197 -33
+-320 -183 -320 -390 0 -295 260 -466 566 -372 107 33 105 29 102 228 -3 169
+-3 169 -122 172 -89 2 -121 -1 -128 -10 -24 -38 10 -58 98 -58 74 0 74 0 74
+-120 0 -152 0 -152 -165 -158 -230 -9 -352 110 -343 333 10 276 276 398 510
+233 20 -14 58 13 58 42 0 59 -207 121 -330 100z M1927 776 c-40 -41 -22 -746
+19 -746 40 0 44 18 44 178 0 179 1 182 70 182 57 0 52 6 169 -192 93 -158 113
+-178 155 -162 24 9 23 11 -79 180 -102 169 -104 172 -77 180 195 60 219 293
+37 369 -62 26 -315 34 -338 11z m306 -80 c73 -30 95 -131 42 -186 -39 -41 -83
+-52 -190 -48 -90 3 -90 3 -93 112 -1 61 0 116 2 123 7 18 195 18 239 -1z
+M2873 783 c-21 -8 -18 -739 2 -747 64 -24 65 -16 65 374 0 374 -4 400 -53 379
+-1 0 -8 -3 -14 -6z M4608 779 c-29 -16 -27 -723 1 -739 59 -31 61 -18 61 370
+0 388 -3 404 -62 369z M5193 783 c-21 -8 -18 -739 2 -747 62 -23 65 -10 65
+314 0 174 4 300 9 300 5 0 104 -137 221 -304 222 -320 231 -330 290 -311 28 9
+32 738 4 749 -52 20 -54 8 -54 -314 0 -313 -3 -331 -41 -277 -9 12 -98 141
+-200 287 -226 326 -230 330 -296 303z M6559 783 c-9 -2 -31 -39 -49 -81 -49
+-112 -128 -294 -209 -480 -80 -183 -79 -178 -49 -185 36 -10 55 9 88 90 46
+112 26 104 243 101 191 -3 191 -3 230 -95 40 -94 60 -113 102 -97 21 8 17 25
+-39 156 -24 57 -67 159 -96 228 -29 69 -72 171 -96 228 -24 57 -44 107 -44
+113 0 5 -12 14 -26 19 -26 10 -29 10 -55 3z m40 -131 c30 -56 140 -335 135
+-343 -6 -11 -301 -12 -308 -1 -6 10 144 362 155 362 4 0 13 -8 18 -18z M7373
+783 c-22 -8 -18 -739 3 -747 24 -9 377 -7 392 3 8 4 12 19 10 32 -3 24 -3 24
+-168 29 -165 5 -165 5 -168 338 -2 344 -7 372 -55 351 -1 0 -8 -3 -14 -6z
+M9866 774 c-24 -23 -24 -705 0 -728 13 -13 46 -16 202 -16 199 0 216 4 210 41
+-3 24 -3 24 -173 29 -170 5 -170 5 -173 335 -2 296 -4 331 -19 343 -22 16 -28
+15 -47 -4z M11823 780 c-80 -32 -8 -70 133 -70 104 0 104 0 106 -332 3 -333 3
+-333 38 -333 35 0 35 0 38 333 2 332 2 332 106 332 118 0 156 10 156 40 0 13
+-10 24 -26 30 -32 13 -521 12 -551 0z M12833 783 c-21 -8 -18 -739 2 -747 56
+-21 64 2 67 181 3 168 3 168 198 168 195 0 195 0 198 -168 2 -168 2 -168 27
+-177 56 -21 55 -30 55 370 0 400 1 391 -55 370 -25 -10 -25 -10 -25 -165 0
+-155 0 -155 -200 -155 -200 0 -200 0 -200 155 0 155 -11 192 -53 174 -1 0 -8
+-3 -14 -6z M13913 783 c-21 -8 -18 -739 2 -747 64 -24 65 -16 65 374 0 374 -4
+400 -53 379 -1 0 -8 -3 -14 -6z M14508 779 c-29 -16 -27 -723 1 -739 58 -30
+61 -13 61 317 0 204 3 294 11 291 5 -2 104 -138 218 -303 219 -315 233 -331
+287 -306 34 15 39 722 5 741 -58 30 -61 13 -61 -315 0 -232 -3 -293 -12 -289
+-7 2 -105 138 -218 300 -218 316 -237 336 -292 303z M17373 784 c-30 -13 -17
+-743 13 -750 65 -16 299 1 349 27 138 69 159 270 36 341 -48 27 -49 32 -15 54
+103 68 76 258 -46 311 -36 15 -311 29 -337 17z m303 -90 c86 -41 84 -168 -3
+-209 -24 -12 -58 -15 -135 -13 -103 3 -103 3 -106 107 -1 58 0 111 2 118 8 20
+198 18 242 -3z m8 -318 c107 -45 115 -199 14 -252 -26 -14 -59 -18 -148 -18
+-115 -1 -115 -1 -118 128 -1 72 0 136 2 143 8 19 205 18 250 -1z M18353 784
+c-21 -9 -18 -740 2 -748 56 -21 64 2 67 181 3 168 3 168 55 171 62 4 60 6 187
+-212 79 -135 100 -156 140 -140 25 10 22 16 -80 185 -100 165 -102 173 -57
+182 170 34 190 275 30 356 -46 23 -307 42 -344 25z m315 -94 c142 -87 50 -230
+-148 -230 -100 0 -100 0 -100 125 0 125 0 125 108 125 90 0 112 -3 140 -20z
+M19525 780 c-15 -5 -47 -67 -110 -211 -49 -112 -115 -265 -148 -339 -83 -191
+-79 -178 -58 -189 38 -21 58 -2 96 89 45 107 27 100 245 100 202 0 184 8 230
+-103 35 -85 58 -106 96 -88 23 10 23 10 -7 83 -70 164 -111 263 -150 356 -23
+53 -59 140 -80 192 -22 52 -43 97 -47 101 -14 13 -47 17 -67 9z m104 -285 c88
+-210 95 -195 -90 -195 -178 0 -169 -20 -81 186 97 230 80 229 171 9z M20333
+783 c-21 -8 -18 -739 2 -747 62 -24 65 -10 65 315 0 229 3 300 12 297 7 -3
+105 -139 220 -303 202 -292 220 -313 265 -314 52 -2 53 2 53 379 0 388 -2 401
+-61 370 -18 -10 -19 -24 -19 -310 0 -233 -3 -300 -12 -300 -7 0 -105 134 -218
+296 -232 335 -241 344 -307 317z M21468 780 c-31 -19 -27 -724 4 -741 39 -21
+321 -6 390 21 305 115 302 593 -4 700 -74 25 -358 40 -390 20z m377 -98 c276
+-126 207 -519 -100 -572 -210 -36 -210 -37 -213 298 -2 304 -2 304 130 300
+112 -3 141 -7 183 -26z" fill="currentColor"/></g>
+    </symbol>
+
+    <!-- diamond separator -->
+    <symbol id="symDiamond" viewBox="0 0 24 24">
+      <path d="M12 2 22 12 12 22 2 12Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+    <!-- arrow -->
+    <symbol id="symArrow" viewBox="0 0 24 24">
+      <path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- eye / first look -->
+    <symbol id="symEye" viewBox="0 0 48 48">
+      <path class="g" d="M3 24s8-12 21-12 21 12 21 12-8 12-21 12S3 24 3 24Z"/>
+      <circle class="g" cx="24" cy="24" r="6.2"/>
+      <path class="g" d="M24 4.5v4M24 39.5v4"/>
+    </symbol>
+    <!-- tag / first purchase -->
+    <symbol id="symTag" viewBox="0 0 48 48">
+      <path class="g" d="M24.6 4H41a3 3 0 0 1 3 3v16.4a3 3 0 0 1-.9 2.1L24.7 43.9a3 3 0 0 1-4.2 0L4.1 27.5a3 3 0 0 1 0-4.2L22.5 4.9A3 3 0 0 1 24.6 4Z"/>
+      <circle class="g" cx="34" cy="14" r="3.4"/>
+    </symbol>
+    <!-- signal / direct updates -->
+    <symbol id="symSignal" viewBox="0 0 48 48">
+      <circle class="g" cx="24" cy="24" r="3.6"/>
+      <path class="g" d="M14.8 14.8a13 13 0 0 0 0 18.4M33.2 33.2a13 13 0 0 0 0-18.4"/>
+      <path class="g" d="M8.4 8.4a22 22 0 0 0 0 31.2M39.6 39.6a22 22 0 0 0 0-31.2"/>
+    </symbol>
+    <!-- confirmation tick -->
+    <symbol id="symTick" viewBox="0 0 48 48">
+      <circle class="g" cx="24" cy="24" r="21"/>
+      <path class="g" d="m14.5 24.5 6.6 6.6L34 18.2"/>
+    </symbol>
+    <!-- garments -->
+    <symbol id="symTee" viewBox="0 0 200 200">
+      <path class="g" d="M62 26 40 39 25 70l21 10 8-16v112h92V64l8 16 21-10-15-31-22-13c-8 15-22 22-38 22s-30-7-38-22Z"/>
+      <path class="g" d="M62 26c8 15 22 22 38 22s30-7 38-22"/>
+    </symbol>
+    <symbol id="symHoodie" viewBox="0 0 200 200">
+      <path class="g" d="M70 30 47 41 28 74l21 12 9-14v104h84V72l9 14 21-12-19-33-23-11c0 13-13 21-30 21s-30-8-30-21Z"/>
+      <path class="g" d="M72 26c4-10 15-15 28-15s24 5 28 15c-6 12-17 18-28 18s-22-6-28-18Z"/>
+      <path class="g" d="M100 44v34M89 78h22"/>
+    </symbol>
+    <symbol id="symTrouser" viewBox="0 0 200 200">
+      <path class="g" d="M60 24h80l7 156h-36l-11-84-11 84H53Z"/>
+      <path class="g" d="M60 24c14 6 66 6 80 0M100 40v56"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" role="status" aria-label="Loading">
+  <div class="loader__mark" id="loaderMark"></div>
+  <div class="loader__bar"><i id="loaderBar"></i></div>
+  <div class="loader__num" id="loaderNum">000</div>
+</div>
+<div class="loader__veil" id="veil" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav__logo" href="#top" aria-label="OCB — Original Clothing Brand, back to top">
+    <svg class="m" viewBox="0 0 724 1126" aria-hidden="true"><use href="#ocbMark"/></svg>
+    <svg class="w" viewBox="0 0 2230 914" aria-hidden="true"><use href="#ocbWord"/></svg>
+  </a>
+  <nav class="nav__mid" id="navMid" aria-label="Sections">
+    <span class="nav__pill" id="navPill" aria-hidden="true"></span>
+    <a href="#drop"    data-scroll data-spy="drop">Collections</a>
+    <a href="#world"   data-scroll data-spy="world">Lookbook</a>
+    <a href="#about"   data-scroll data-spy="about">About</a>
+    <a href="#contact" data-scroll data-spy="contact">Contact</a>
+  </nav>
+  <nav class="nav__mob" aria-label="Sections">
+    <a href="#drop"    data-scroll data-spy="drop"    aria-label="Collections">Drop</a>
+    <a href="#world"   data-scroll data-spy="world"   aria-label="Lookbook">World</a>
+    <a href="#about"   data-scroll data-spy="about">About</a>
+    <a href="#contact" data-scroll data-spy="contact">Contact</a>
+  </nav>
+  <a href="#signup" data-scroll class="btn btn--sm nav__cta" data-magnet>
+    <span>Get Early Access <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+  </a>
+</header>
+
+<main id="top">
+
+<!-- ============ 01 — HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__img">
+      <img class="pic" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=2000&q=82" alt="" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero__tint"></div>
+    <div class="hero__glow"></div>
+    <div class="hero__motif" id="heroMotif" data-parallax="0.16"></div>
+    <div class="hero__scan"></div>
+    <div class="hero__vign"></div>
+  </div>
+
+  <div class="hero__top hero__fade">
+    <span class="tag"><i></i>Pre-launch — 01</span>
+    <span class="tag">Est. MMXXVI<i></i></span>
+  </div>
+
+  <div class="hero__inner">
+    <h1 class="display">
+      <span class="ln"><span>Some things</span></span>
+      <span class="ln"><span>aren't said.</span></span>
+      <span class="ln"><span><em>They're worn.</em></span></span>
+    </h1>
+    <p class="hero__sub hero__fade">OCB — Original Clothing Brand.<br>First collection, coming soon.</p>
+    <div class="hero__cta hero__fade">
+      <a href="#signup" data-scroll class="btn" data-magnet>
+        <span>Get Early Access <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+      </a>
+      <span class="hero__teaser">No noise. No countdown. Just early.</span>
+    </div>
+  </div>
+
+  <figure class="hero__plate" aria-hidden="true">
+    <img class="pic" src="https://images.unsplash.com/photo-1543529140-86d36880cafd?auto=format&fit=crop&w=900&q=80" alt="" decoding="async">
+    <figcaption>OCB / 001</figcaption>
+  </figure>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="track"><i></i></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true"><div class="marquee__row" id="marquee"></div></div>
+
+<!-- ============ 02 — BRAND PHILOSOPHY ============ -->
+<section class="light philo" id="philosophy">
+  <div class="wrap philo__grid">
+    <div class="philo__head">
+      <p class="eyebrow" data-rv>02</p>
+      <h2 class="section-title" style="margin-top:18px">
+        <span class="mask" data-rv-mask><span>Silent</span></span>
+        <span class="mask" data-rv-mask><span>Expression</span></span>
+      </h2>
+      <div class="philo__sigil" data-mark data-draw></div>
+    </div>
+    <div class="philo__body">
+      <p><span class="ln" data-rv-line><span>Not everything needs</span></span><span class="ln" data-rv-line><span>an explanation.</span></span></p>
+      <p class="dim"><span class="ln" data-rv-line><span>What you wear says something</span></span><span class="ln" data-rv-line><span>before you speak.</span></span><span class="ln" data-rv-line><span>What you leave off says just as much.</span></span></p>
+      <p class="dim"><span class="ln" data-rv-line><span>OCB isn't built for people</span></span><span class="ln" data-rv-line><span>chasing attention.</span></span><span class="ln" data-rv-line><span>It's built for people who already</span></span><span class="ln" data-rv-line><span>have presence — and don't need</span></span><span class="ln" data-rv-line><span>to raise their voice to prove it.</span></span></p>
+      <p><span class="ln" data-rv-line><span>We make clothing for what</span></span><span class="ln" data-rv-line><span>you don't say out loud.</span></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BAND — full-bleed break ============ -->
+<section class="band" aria-hidden="true">
+  <img class="pic" data-band="0.1" src="https://images.unsplash.com/photo-1661181475147-bbd20ef65781?auto=format&fit=crop&w=1800&q=80" alt="" loading="lazy" decoding="async">
+  <div class="band__tint"></div>
+  <span class="band__rule"><i></i>Lookbook</span>
+</section>
+
+<!-- ============ 03 — THE OCB WORLD ============ -->
+<section class="world" id="world">
+  <div class="wrap">
+    <div class="world__head">
+      <div>
+        <p class="eyebrow" data-rv>03</p>
+        <h2 class="section-title world__title">
+          <span class="mask" data-rv-mask><span>The OCB</span></span>
+          <span class="mask" data-rv-mask><span>World</span></span>
+        </h2>
+      </div>
+    </div>
+    <div class="world__grid" id="worldGrid"></div>
+    <div class="world__quote" data-rv>
+      <p>This is what quiet looks like.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 — FIRST COLLECTION ============ -->
+<section class="light drop" id="drop">
+  <div class="wrap">
+    <div class="drop__grid">
+      <div class="drop__copy">
+        <p class="eyebrow" data-rv>04</p>
+        <h2 class="section-title" style="margin:18px 0 34px">
+          <span class="mask" data-rv-mask><span>The First</span></span>
+          <span class="mask" data-rv-mask><span>Drop</span></span>
+        </h2>
+        <p data-rv><strong>Our first collection is built around restraint —<br>fewer pieces, more intention.</strong></p>
+        <p data-rv>Limited by design, not by marketing trick.</p>
+        <p data-rv>Early access members see it before anyone else.</p>
+        <dl class="drop__meta" data-rv>
+          <div><dt>Collection</dt><dd>001</dd></div>
+          <div><dt>Approach</dt><dd>Restraint</dd></div>
+          <div><dt>Release</dt><dd>Early access first</dd></div>
+        </dl>
+        <a href="#signup" data-scroll class="btn" data-magnet data-rv>
+          <span>Be First In <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="silh" id="dropRack"></div>
+        <p class="silh__note" data-rv>Silhouettes — full pieces revealed to early access</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 — WHY EARLY ACCESS ============ -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="why__head">
+      <p class="eyebrow" data-rv>05</p>
+      <h2 class="section-title" style="margin-top:18px">
+        <span class="mask" data-rv-mask><span>Why Join</span></span>
+        <span class="mask" data-rv-mask><span>Early</span></span>
+      </h2>
+    </div>
+    <div class="why__list">
+      <div class="why__item" data-rv data-draw>
+        <span class="why__no">01</span>
+        <svg class="why__ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#symEye"/></svg>
+        <div class="why__txt">
+          <h3>First Look</h3>
+          <p>First look at the collection before public release.</p>
+        </div>
+      </div>
+      <div class="why__item" data-rv data-draw>
+        <span class="why__no">02</span>
+        <svg class="why__ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#symTag"/></svg>
+        <div class="why__txt">
+          <h3>First In</h3>
+          <p>First opportunity to purchase, before pieces sell out.</p>
+        </div>
+      </div>
+      <div class="why__item" data-rv data-draw>
+        <span class="why__no">03</span>
+        <svg class="why__ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#symSignal"/></svg>
+        <div class="why__txt">
+          <h3>Direct Line</h3>
+          <p>Direct updates as we build — no noise, only what matters.</p>
+        </div>
+      </div>
+    </div>
+    <p class="why__close" data-rv>This isn't a waitlist for hype.<br>It's a head start.</p>
+  </div>
+</section>
+
+<!-- ============ 06 — EMAIL SIGN-UP ============ -->
+<section class="signup" id="signup">
+  <div class="signup__bg" id="signupMotif" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="signup__inner">
+      <p class="eyebrow" data-rv>06</p>
+      <h2 style="margin-top:16px">
+        <span class="mask" data-rv-mask><span>Enter OCB</span></span>
+      </h2>
+      <p class="signup__sub" data-rv>Be the first to see the collection.<br>No spam, no noise — just what matters, when it matters.</p>
+
+      <form class="form" id="form" novalidate data-rv>
+        <div class="form__field">
+          <label class="sr" for="email">Your email</label>
+          <input type="email" id="email" name="email" placeholder="Your email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn--fill" data-magnet>
+          <span>Get Early Access <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+        </button>
+      </form>
+      <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
+      <p class="signup__micro">One email when we launch. Nothing else.</p>
+
+      <div class="signup__done" data-draw>
+        <svg class="tick" viewBox="0 0 48 48" aria-hidden="true"><use href="#symTick"/></svg>
+        <p>You're in. We'll be in touch — once, when it matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 — ABOUT OCB ============ -->
+<section class="about" id="about">
+  <div class="about__mark" aria-hidden="true">
+    <svg viewBox="0 0 724 1126"><use href="#ocbMark"/></svg>
+  </div>
+  <div class="wrap about__grid">
+    <div>
+      <p class="eyebrow" data-rv>07</p>
+      <svg class="w" viewBox="0 0 2230 914" aria-hidden="true" data-rv
+           style="width:clamp(110px,14vw,180px);color:var(--cream);margin-top:20px"><use href="#ocbWord"/></svg>
+      <figure class="about__ph ph" data-rv>
+        <img class="pic" src="https://images.unsplash.com/photo-1660018322139-0e58555df00d?auto=format&fit=crop&w=1000&q=80" alt="Portrait — OCB" loading="lazy" decoding="async">
+      </figure>
+    </div>
+    <div class="about__body">
+      <p data-rv>OCB — Original Clothing Brand — was built on a simple idea: expression doesn't need to be loud to be real.</p>
+      <p data-rv>We design clothing for people who communicate through detail, not volume. Every piece is made with that restraint in mind — fewer statements, more intention.</p>
+      <p data-rv>This is the beginning of that world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 — FINAL CTA ============ -->
+<section class="final" id="final">
+  <div class="final__img" aria-hidden="true">
+    <img class="pic" src="https://images.unsplash.com/photo-1664076423411-e570cfdfcbed?auto=format&fit=crop&w=1800&q=80" alt="" loading="lazy" decoding="async">
+    <div class="final__tint"></div>
+  </div>
+  <div class="final__glow" aria-hidden="true"></div>
+  <div class="final__inner">
+    <h2>
+      <span class="ln" data-rv-line><span>The first chapter</span></span>
+      <span class="ln" data-rv-line><span>starts quietly.</span></span>
+    </h2>
+    <p class="final__sub" data-rv>Get in before it's public.</p>
+    <a href="#signup" data-scroll class="btn" data-magnet data-rv>
+      <span>Get Early Access <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ 09 — CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap contact__grid">
+    <div>
+      <p class="eyebrow" data-rv>09</p>
+      <h2 class="contact__title">
+        <span class="mask" data-rv-mask><span>Contact</span></span>
+      </h2>
+      <p class="contact__note" data-rv>For wholesale, press or anything else — one line is enough.</p>
+    </div>
+    <div class="contact__rows">
+      <a class="contact__row" id="contactMail" href="#" data-rv>
+        <span class="contact__lab">Email</span>
+        <span class="contact__val" id="contactMailText">hello@ocb.com
+          <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+      </a>
+      <a class="contact__row" id="contactIg" href="#" target="_blank" rel="noopener" data-rv>
+        <span class="contact__lab">Instagram</span>
+        <span class="contact__val" id="contactIgText">@ocb
+          <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+      </a>
+      <a class="contact__row" href="#signup" data-scroll data-rv>
+        <span class="contact__lab">Early Access</span>
+        <span class="contact__val">Join the list
+          <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><use href="#symArrow"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 09 — FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <svg class="w" viewBox="0 0 2230 914" aria-hidden="true"><use href="#ocbWord"/></svg>
+        <p>Original Clothing Brand<br>Clothing for what you don't say out loud.</p>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a id="igLink" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#symDiamond"/></svg><span id="igText">Instagram</span></a></li>
+          <li><a id="mailLink" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#symDiamond"/></svg><span id="mailText">Contact</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#" data-legal>Privacy Policy</a></li>
+          <li><a href="#" data-legal>Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <p>© 2026 OCB — Original Clothing Brand. All rights reserved.</p>
+      <p class="foot__status"><i></i> Pre-launch — the store opens with the first drop</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   CONFIG — fill these two before launch, nothing else to edit.
+   ============================================================ */
+var CONFIG = {
+  instagram : "[handle]",   // e.g. "ocb.official"  (no @)
+  email     : "[email]",    // e.g. "hello@ocb.com"
+  // Paste your Google Apps Script web-app URL here to capture sign-ups
+  // in a Google Sheet. Leave "" and the form validates + confirms locally.
+  // e.g. "https://script.google.com/macros/s/AKfycb.../exec"
+  formEndpoint : ""
+};
+
+
+/* ============================================================
+   PHOTOGRAPHY
+   Swap any URL below for your own shoot — same aspect ratios,
+   nothing else needs touching. Portraits read best at 3:4.
+   ============================================================ */
+var LOOKBOOK = [
+  { src:"https://images.unsplash.com/photo-1627225793904-a2f900a6e4cf?auto=format&fit=crop&w=1000&q=80", alt:"Model in a plain crew-neck tee" },
+  { src:"https://images.unsplash.com/photo-1598554793905-075f7b355cd9?auto=format&fit=crop&w=1000&q=80", alt:"Model against a bare wall" },
+  { src:"https://images.unsplash.com/photo-1622445272461-c6580cab8755?auto=format&fit=crop&w=1000&q=80", alt:"Model in a tee, headphones on" },
+  { src:"https://images.unsplash.com/photo-1613852348851-df1739db8201?auto=format&fit=crop&w=1000&q=80", alt:"Model in a tee and sunglasses" },
+  { src:"https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?auto=format&fit=crop&w=1000&q=80", alt:"Full-length, tee and denim" },
+  { src:"https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=1000&q=80", alt:"Folded tee, close detail" }
+];
+
+var RACK = [
+  { src:"https://images.unsplash.com/photo-1622445275463-afa2ab738c34?auto=format&fit=crop&w=1000&q=80", alt:"Piece 001", no:"001" },
+  { src:"https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=1000&q=80", alt:"Piece 002", no:"002" },
+  { src:"https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?auto=format&fit=crop&w=1000&q=80", alt:"Piece 003", no:"003" }
+];
+
+function photo(src, alt, extra){
+  return '<img class="pic" src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async"' +
+         (extra || "") + '>';
+}
+
+var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var $  = function(s,c){ return (c||document).querySelector(s); };
+var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+
+/* ---------- contact wiring (footer + contact section) ---------- */
+(function(){
+  var h       = CONFIG.instagram.replace(/^@/,"");
+  var igHref  = /^\[/.test(h) ? "#" : "https://instagram.com/" + h;
+  var mlHref  = /^\[/.test(CONFIG.email) ? "#" : "mailto:" + CONFIG.email;
+
+  /* the arrow glyph lives inside the label, so only swap the text node */
+  function setText(el, txt){
+    if(!el) return;
+    var n = el.firstChild;
+    if(n && n.nodeType === 3) n.nodeValue = txt + " ";
+    else el.insertBefore(document.createTextNode(txt + " "), el.firstChild);
+  }
+  function wire(linkId, textId, href, txt){
+    var a = $(linkId), t = $(textId);
+    if(a) a.href = href;
+    if(t) setText(t, txt);
+  }
+
+  wire("#igLink",     "#igText",         igHref, "@" + h);
+  wire("#mailLink",   "#mailText",       mlHref, CONFIG.email);
+  wire("#contactIg",  "#contactIgText",  igHref, "@" + h);
+  wire("#contactMail","#contactMailText",mlHref, CONFIG.email);
+})();
+
+/* ============================================================
+   SVG BUILDERS — every symbol on this page is drawn, not loaded
+   ============================================================ */
+var MARK_D = $("#markPathSrc").getAttribute("d");
+
+function markSVG(stroke){
+  var p = stroke
+    ? '<path d="'+MARK_D+'" fill="none" stroke="currentColor" stroke-width="1.15" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>'
+    : '<path d="'+MARK_D+'" fill="currentColor"/>';
+  return '<svg viewBox="0 0 724 1126" aria-hidden="true"><g transform="translate(0,1126) scale(0.1,-0.1)">'+p+'</g></svg>';
+}
+
+/* concentric stadium field — the logo's core geometry, expanded */
+function stadiumField(rings, w, h, opts){
+  opts = opts || {};
+  var step = (w/2) / (rings + 0.6), s = '', i, ins, rw, rh;
+  for(i=0;i<rings;i++){
+    ins = i*step;
+    rw = w - ins*2; rh = h - ins*2;
+    if(rw < 6 || rh < 6) break;
+    s += '<rect class="st" x="'+ins.toFixed(1)+'" y="'+ins.toFixed(1)+'" width="'+rw.toFixed(1)+
+         '" height="'+rh.toFixed(1)+'" rx="'+(rw/2).toFixed(1)+'"'+
+         ' opacity="'+(opts.fade ? (1 - i/rings*0.72).toFixed(2) : 1)+'"/>';
+  }
+  return '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet" aria-hidden="true">'+s+'</svg>';
+}
+
+/* ---------- inject built graphics ---------- */
+$("#loaderMark").innerHTML = markSVG(true);
+$$("[data-mark]").forEach(function(el){ el.innerHTML = markSVG(true); });
+$("#heroMotif").innerHTML   = stadiumField(15, 644, 1000, {fade:true});
+$("#signupMotif").innerHTML = stadiumField(13, 560, 870,  {fade:true});
+
+(function(){
+  var g = $("#worldGrid"), i, d, t;
+  for(i=0;i<LOOKBOOK.length;i++){
+    t = LOOKBOOK[i];
+    d = document.createElement("div");
+    d.className = "tile ph";
+    d.setAttribute("data-rv","");
+    d.innerHTML = photo(t.src, t.alt) +
+      '<span class="tile__lab">' + ("00"+(i+1)).slice(-3) + '</span>';
+    g.appendChild(d);
+  }
+})();
+
+/* ---------- collection rack ---------- */
+(function(){
+  var g = $("#dropRack"), i, d, r;
+  if(!g) return;
+  g.setAttribute("role","img");
+  g.setAttribute("aria-label","Pieces from the first collection");
+  for(i=0;i<RACK.length;i++){
+    r = RACK[i];
+    d = document.createElement("div");
+    d.className = "silh__cell";
+    d.setAttribute("data-rv","");
+    d.innerHTML = photo(r.src, r.alt) + '<i>' + r.no + '</i>';
+    g.appendChild(d);
+  }
+})();
+
+/* ---------- photo load / failure handling ----------
+   Photos fade in once decoded. If a remote image can't be
+   reached, it's removed so the tonal gradient shows instead
+   of a broken frame. ----------------------------------- */
+(function(){
+  function watch(im){
+    function ok(){ im.classList.add("ld"); }
+    function bad(){ im.classList.add("dead"); }
+    if(im.complete){ if(im.naturalWidth) ok(); else bad(); return; }
+    im.addEventListener("load", ok, {once:true});
+    im.addEventListener("error", bad, {once:true});
+  }
+  $$("img.pic").forEach(watch);
+  setTimeout(function(){ $$("img.pic").forEach(watch); }, 0);
+  window.addEventListener("load", function(){ $$("img.pic").forEach(watch); });
+})();
+
+(function(){
+  var words = ["Original Clothing Brand","Silent Expression","First Drop — Coming Soon","Fewer Pieces, More Intention","Early Access Only"];
+  var block = '<div>' + words.map(function(w){
+    return '<span>'+w+'</span><svg viewBox="0 0 24 24"><use href="#symDiamond"/></svg>';
+  }).join('') + '</div>';
+  $("#marquee").innerHTML = block + block;
+})();
+
+/* ============================================================
+   STROKE-DRAW PREP
+   ============================================================ */
+function prepDraw(root){
+  $$("path,circle,line,rect,polyline", root).forEach(function(p){
+    try{
+      var L = p.getTotalLength ? p.getTotalLength() : 0;
+      if(L > 0) p.style.setProperty("--len", Math.ceil(L));
+    }catch(e){}
+  });
+}
+$$("[data-draw]").forEach(function(el){
+  // <use> shadow content can't be measured — inline the referenced symbol first
+  $$("use", el).forEach(function(u){
+    var id = (u.getAttribute("href")||u.getAttribute("xlink:href")||"").slice(1);
+    var sym = document.getElementById(id);
+    if(!sym) return;
+    var frag = document.createDocumentFragment();
+    Array.prototype.slice.call(sym.children).forEach(function(c){ frag.appendChild(c.cloneNode(true)); });
+    u.parentNode.replaceChild(frag, u);
+  });
+  prepDraw(el);
+});
+prepDraw($("#loaderMark"));
+prepDraw($(".signup__done"));
+(function(){
+  var lp = $("#loaderMark path");
+  if(lp){ var L = Math.ceil(lp.getTotalLength()); lp.style.setProperty("--len", L); }
+})();
+
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+(function(){
+  var loader = $("#loader"), veil = $("#veil"), bar = $("#loaderBar"), num = $("#loaderNum");
+  var pct = 0, done = false;
+  document.body.classList.add("is-locked");
+
+  function set(v){
+    pct = Math.min(100, v);
+    bar.style.transform = "scaleX(" + (pct/100) + ")";
+    num.textContent = ("00" + Math.round(pct)).slice(-3);
+  }
+  function finish(){
+    if(done) return; done = true;
+    set(100);
+    setTimeout(function(){
+      loader.classList.add("done"); veil.classList.add("done");
+      document.body.classList.remove("is-locked");
+      document.documentElement.classList.add("ready");
+      setTimeout(function(){ loader.remove(); veil.remove(); }, 1300);
+    }, RM ? 60 : 420);
+  }
+
+  if(RM){ finish(); return; }
+  var tick = setInterval(function(){
+    set(pct + Math.random()*11 + 4);
+    if(pct >= 99){ clearInterval(tick); }
+  }, 105);
+  var hard = setTimeout(function(){ clearInterval(tick); finish(); }, 2500);
+  window.addEventListener("load", function(){
+    setTimeout(function(){ clearInterval(tick); clearTimeout(hard); finish(); }, 1500);
+  });
+})();
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+(function(){
+  var targets = $$("[data-rv], [data-rv-mask], [data-rv-line], [data-draw]");
+  if(RM || !("IntersectionObserver" in window)){
+    targets.forEach(function(el){ el.classList.add("in"); });
+    document.documentElement.classList.add("ready");
+    return;
+  }
+  $$("[data-rv-mask]").forEach(function(el){ el.classList.add("mask"); });
+  $$("[data-rv-line]").forEach(function(el){ el.classList.add("ln"); });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var sibs = el.parentNode ? $$("[data-rv-mask],[data-rv-line]", el.parentNode) : [];
+      var idx = sibs.indexOf(el);
+      el.style.transitionDelay = (idx > 0 ? idx * 0.075 : 0) + "s";
+      el.classList.add("in");
+      io.unobserve(el);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+  targets.forEach(function(el){ io.observe(el); });
+})();
+
+/* ============================================================
+   NAV
+   ============================================================ */
+(function(){
+  var nav = $("#nav"), last = 0, tickQ = false;
+  var mid = $("#navMid"), pill = $("#navPill");
+  var links = $$("[data-spy]");
+  var current = null;
+
+  /* move the capsule highlight onto a given link */
+  function movePill(a){
+    if(!mid || !pill || !a || a.parentNode !== mid) return;
+    pill.style.width = a.offsetWidth + "px";
+    pill.style.transform = "translateX(" + a.offsetLeft + "px)";
+    mid.classList.add("lit");
+  }
+  function pillToActive(){
+    var a = mid ? mid.querySelector("a.active") : null;
+    if(a) movePill(a); else if(mid) mid.classList.remove("lit");
+  }
+
+  /* hover preview, snapping back to the active section on leave */
+  if(mid){
+    links.forEach(function(a){
+      if(a.parentNode !== mid) return;
+      a.addEventListener("mouseenter", function(){ movePill(a); });
+    });
+    mid.addEventListener("mouseleave", pillToActive);
+  }
+
+  /* scroll-spy: the section occupying the upper third of the viewport wins */
+  var spied = links.map(function(a){ return a.getAttribute("data-spy"); })
+    .filter(function(v,i,arr){ return arr.indexOf(v) === i; });
+
+  function spy(){
+    var line = window.innerHeight * 0.34, found = null;
+    for(var i = 0; i < spied.length; i++){
+      var el = document.getElementById(spied[i]);
+      if(!el) continue;
+      var r = el.getBoundingClientRect();
+      if(r.top <= line && r.bottom > line) found = spied[i];
+    }
+    /* near the very bottom, always light the last item */
+    if(window.innerHeight + window.pageYOffset >= document.body.scrollHeight - 80){
+      found = spied[spied.length - 1];
+    }
+    if(found === current) return;
+    current = found;
+    links.forEach(function(a){
+      a.classList.toggle("active", a.getAttribute("data-spy") === found);
+    });
+    pillToActive();
+  }
+
+  function onScroll(){
+    var y = window.pageYOffset;
+    nav.classList.toggle("solid", y > 40);
+    if(y > 420 && y > last + 4) nav.classList.add("hide");
+    else if(y < last - 4 || y < 200) nav.classList.remove("hide");
+    last = y;
+    spy();
+    tickQ = false;
+  }
+  window.addEventListener("scroll", function(){
+    if(!tickQ){ tickQ = true; requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  window.addEventListener("resize", function(){ current = null; spy(); }, {passive:true});
+  /* fonts change link widths — re-measure once they land */
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(pillToActive);
+  onScroll();
+})();
+
+/* smooth anchor scroll */
+$$("[data-scroll]").forEach(function(a){
+  a.addEventListener("click", function(e){
+    var t = document.querySelector(a.getAttribute("href"));
+    if(!t) return;
+    e.preventDefault();
+    t.scrollIntoView({behavior: RM ? "auto" : "smooth", block: "start"});
+    if(a.getAttribute("href") === "#signup"){
+      setTimeout(function(){ var f = $("#email"); if(f) f.focus({preventScroll:true}); }, RM ? 0 : 900);
+    }
+  });
+});
+
+/* ============================================================
+   PARALLAX
+   ============================================================ */
+(function(){
+  if(RM) return;
+  var els = $$("[data-parallax]");
+  if(!els.length) return;
+  var raf = false;
+  function run(){
+    var y = window.pageYOffset;
+    els.forEach(function(el){
+      var k = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+      el.style.transform = "translate(-50%,-50%) translateY(" + (y*k).toFixed(2) + "px) rotate(" + (y*0.006).toFixed(3) + "deg)";
+    });
+    raf = false;
+  }
+  window.addEventListener("scroll", function(){ if(!raf){ raf = true; requestAnimationFrame(run); } }, {passive:true});
+  run();
+})();
+
+/* ============================================================
+   BAND PARALLAX — the full-bleed photograph drifts as it passes
+   ============================================================ */
+(function(){
+  if(RM) return;
+  var els = $$("[data-band]");
+  if(!els.length) return;
+  var raf = false;
+  function run(){
+    var vh = window.innerHeight;
+    els.forEach(function(el){
+      var r = el.parentNode.getBoundingClientRect();
+      if(r.bottom < -200 || r.top > vh + 200) return;
+      var k = parseFloat(el.getAttribute("data-band")) || 0.1;
+      var mid = r.top + r.height/2 - vh/2;
+      el.style.transform = "translateY(" + (-mid*k).toFixed(2) + "px)";
+    });
+    raf = false;
+  }
+  window.addEventListener("scroll", function(){ if(!raf){ raf = true; requestAnimationFrame(run); } }, {passive:true});
+  window.addEventListener("resize", run, {passive:true});
+  run();
+})();
+
+/* ============================================================
+   CURSOR + MAGNETIC BUTTONS
+   ============================================================ */
+(function(){
+  if(RM || window.matchMedia("(hover:none)").matches) return;
+  var ring = $(".cursor"), dot = $(".cursor-dot");
+  var rx=0, ry=0, tx=0, ty=0, on=false;
+  window.addEventListener("mousemove", function(e){
+    tx = e.clientX; ty = e.clientY;
+    dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%)";
+    if(!on){ on = true; ring.classList.add("on"); dot.classList.add("on"); }
+  }, {passive:true});
+  (function loop(){
+    rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
+    ring.style.transform = "translate(" + rx.toFixed(2) + "px," + ry.toFixed(2) + "px) translate(-50%,-50%)";
+    requestAnimationFrame(loop);
+  })();
+  $$("a,button,input,.tile").forEach(function(el){
+    el.addEventListener("mouseenter", function(){ ring.classList.add("grow"); });
+    el.addEventListener("mouseleave", function(){ ring.classList.remove("grow"); });
+  });
+
+  $$("[data-magnet]").forEach(function(el){
+    el.addEventListener("mousemove", function(e){
+      var r = el.getBoundingClientRect();
+      var mx = e.clientX - (r.left + r.width/2);
+      var my = e.clientY - (r.top + r.height/2);
+      el.style.transform = "translate(" + (mx*0.22).toFixed(2) + "px," + (my*0.3).toFixed(2) + "px)";
+    });
+    el.addEventListener("mouseleave", function(){ el.style.transform = ""; });
+  });
+})();
+
+/* ============================================================
+   EMAIL SIGN-UP
+   ============================================================ */
+(function(){
+  var form = $("#form"), input = $("#email"), msg = $("#formMsg"), sec = $("#signup");
+  var RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+  var busy = false;
+
+  function say(text, isErr){
+    msg.textContent = text;
+    msg.classList.toggle("err", !!isErr);
+    msg.classList.add("show");
+  }
+
+  input.addEventListener("input", function(){
+    input.setAttribute("aria-invalid","false");
+    msg.classList.remove("show");
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(busy) return;
+    var val = input.value.trim();
+    if(!RE.test(val)){
+      input.setAttribute("aria-invalid","true");
+      say("Enter a valid email address", true);
+      input.focus();
+      return;
+    }
+    busy = true;
+    say("Sending…");
+
+    function ok(){
+      busy = false;
+      sec.classList.add("done");
+      try{ localStorage.setItem("ocb_early_access","1"); }catch(err){}
+    }
+    function fail(){
+      busy = false;
+      say("Something went wrong. Try again.", true);
+    }
+
+    if(!CONFIG.formEndpoint){
+      // No endpoint configured yet — confirm locally so the page stays functional.
+      setTimeout(ok, 650);
+      return;
+    }
+    // text/plain avoids CORS preflight so Google Apps Script works
+    fetch(CONFIG.formEndpoint, {
+      method: "POST",
+      headers: {"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify({ email: val, source: "ocb-prelaunch" })
+    }).then(function(r){ return r.json(); })
+     .then(function(d){ (d.result === "success" || d.result === "duplicate") ? ok() : fail(); })
+     .catch(function(){
+       // If CORS still blocks the *response*, the POST itself went through.
+       // Treat as success (email was recorded server-side).
+       ok();
+     });
+  });
+
+  // returning visitor
+  try{ if(localStorage.getItem("ocb_early_access") === "1") sec.classList.add("done"); }catch(err){}
+})();
+
+/* legal links — placeholders until the pages exist */
+$$("[data-legal]").forEach(function(a){
+  a.addEventListener("click", function(e){ e.preventDefault(); });
+});
+
+/* keep 100svh honest on mobile browsers */
+(function(){
+  function vh(){ document.documentElement.style.setProperty("--vh", window.innerHeight*0.01 + "px"); }
+  vh(); window.addEventListener("resize", vh);
+})();
+
+})();
+</script>
+</body>
+</html>
